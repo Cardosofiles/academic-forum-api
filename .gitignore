@@ -1,0 +1,32 @@
+# Dependências
+node_modules/
+.pnpm-store/
+
+# Build
+dist/
+*.tsbuildinfo
+
+# Ambiente — .env.example É versionado, o resto nunca
+.env
+.env.*
+!.env.example
+
+# Testes e cobertura
+coverage/
+.vitest/
+
+# Logs
+*.log
+npm-debug.log*
+pnpm-debug.log*
+
+# Editor / SO
+.DS_Store
+Thumbs.db
+.idea/
+*.swp
+
+# Claude Code
+# .claude/ é versionado de propósito: rules, skills, agents, hooks e memory/.
+# Só o override local de MCP fica de fora.
+.claude/settings.local.json
