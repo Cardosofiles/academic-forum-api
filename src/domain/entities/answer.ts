@@ -1,6 +1,7 @@
 import type { UniqueEntityId } from "@/core/entities/unique-entity-id";
 
 import { Entity } from "@/core/entities/entity.js";
+import type { Optional } from "@/core/types/optional";
 
 interface AnswerProps {
   authorId: UniqueEntityId;
@@ -15,7 +16,18 @@ export class Answer extends Entity<AnswerProps> {
     return this.props.content;
   }
 
-  constructor(props: AnswerProps, id?: string) {
-    super(props, id);
+  static create(
+    props: Optional<AnswerProps, "createdAt">,
+    id?: UniqueEntityId,
+  ) {
+    const answer = new Answer(
+      {
+        ...props,
+        createdAt: new Date(),
+      },
+      id,
+    );
+
+    return answer;
   }
 }

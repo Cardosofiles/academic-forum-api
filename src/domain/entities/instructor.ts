@@ -1,3 +1,5 @@
+import type { UniqueEntityId } from "@/core/entities/unique-entity-id";
+
 import { Entity } from "@/core/entities/entity.js";
 
 interface InstructorProps {
@@ -5,7 +7,8 @@ interface InstructorProps {
 }
 
 export class Instructor extends Entity<InstructorProps> {
-  constructor(props: InstructorProps, id?: string) {
-    super(props, id);
+  static create(props: InstructorProps, id?: UniqueEntityId) {
+    const instructor = new Instructor(props, id);
+    return instructor;
   }
 }
