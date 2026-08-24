@@ -1,21 +1,25 @@
-import { expect, test } from 'vitest';
-
-import type { AnswersRepository } from '@/domain/forum/application/repositories/answers-repository';
+import { beforeEach, describe, expect, it } from 'vitest';
 
 import { AnswerQuestionUseCase } from '@/domain/forum/application/use-cases/answer-question';
+import { InMemoryAnswersRepository } from '@test/unit/domain/forum/application/repositories/in-memory-answers-repository';
 
-const makeAnswersRepository: AnswersRepository = {
-  create: () => Promise.resolve(),
-};
+let inMemoryAnswersRepository: InMemoryAnswersRepository;
+let sut: AnswerQuestionUseCase;
 
-test('create an answer', async () => {
-  const answerQuestion = new AnswerQuestionUseCase(makeAnswersRepository);
-
-  const answer = await answerQuestion.execute({
-    questionId: '1',
-    instructorId: '1',
-    content: 'Nova resposta',
+describe('Create Answer Use Case', () => {
+  beforeEach(() => {
+    inMemoryAnswersRepository = new InMemoryAnswersRepository();
+    sut = new AnswerQuestionUseCase(inMemoryAnswersRepository);
   });
 
-  expect(answer.content).toEqual('Nova resposta');
+  it('should create an answer', async () => {
+    const { answer } = await sut.execute({
+      instructorId: '1',
+      questionId: '1',
+      content: 'Conteúdo da resposta',
+    });
+
+    expect(answer.id).toBeTruthy();
+    expect(inMemoryAnswersRepository.items[0]?.id).toEqual(answer.id);
+  });
 });

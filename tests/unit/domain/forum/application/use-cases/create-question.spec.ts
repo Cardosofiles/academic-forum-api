@@ -1,23 +1,25 @@
-import { expect, test } from 'vitest';
-
-import type { QuestionsRepository } from '@/domain/forum/application/repositories/questions-repositoty';
-import type { Question } from '@/domain/forum/enterprise/entities/question';
+import { beforeEach, describe, expect, it } from 'vitest';
 
 import { CreateQuestionUseCase } from '@/domain/forum/application/use-cases/create-question';
+import { InMemoryQuestionsRepository } from '@test/unit/domain/forum/application/repositories/in-memory-questions-repository';
 
-const fakeQuestionsRepository: QuestionsRepository = {
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  create: async (question: Question) => {},
-};
+let inMemoryQuestionsRepository: InMemoryQuestionsRepository;
+let sut: CreateQuestionUseCase;
 
-test('create a question', async () => {
-  const createQuestion = new CreateQuestionUseCase(fakeQuestionsRepository);
-
-  const { question } = await createQuestion.execute({
-    authorId: '1',
-    title: 'Nova pergunta',
-    content: 'Conteúdo da pergunta',
+describe('Create Question Use Case', () => {
+  beforeEach(() => {
+    inMemoryQuestionsRepository = new InMemoryQuestionsRepository();
+    sut = new CreateQuestionUseCase(inMemoryQuestionsRepository);
   });
 
-  expect(question.id).toBeTruthy();
+  it('should create a question', async () => {
+    const { question } = await sut.execute({
+      authorId: '1',
+      title: 'Nova pergunta',
+      content: 'Conteúdo da pergunta',
+    });
+
+    expect(question.id).toBeTruthy();
+    expect(inMemoryQuestionsRepository.items[0]?.id).toEqual(question.id);
+  });
 });
