@@ -33,7 +33,8 @@
     // "noPropertyAccessFromIndexSignature": true,
 
     "paths": {
-      "@/*": ["./src/*"]
+      "@/*": ["./src/*"],
+      "@test/*": ["./tests/*"]
     },
 
     // Recommended Options
@@ -44,5 +45,7 @@
     "noUncheckedSideEffectImports": true,
     "moduleDetection": "force",
     "skipLibCheck": true
-  }
+  },
+
+  "include": ["src", "tests", "vitest.config.ts"]
 }
