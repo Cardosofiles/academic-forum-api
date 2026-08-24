@@ -6,7 +6,10 @@
   "scripts": {
     "dev": "tsc --watch",
     "test": "vitest run",
-    "test:watch": "vitest watch"
+    "test:watch": "vitest watch",
+    "lint": "eslint . --ext .ts",
+    "lint:fix": "eslint . --ext .ts --fix",
+    "format": "prettier --write ."
   },
   "keywords": [],
   "author": "",
@@ -20,8 +23,16 @@
   },
   "type": "module",
   "devDependencies": {
+    "@eslint/js": "^10.0.1",
     "@types/node": "^26.2.0",
-    "typescript": "^7.0.2",
+    "eslint": "^10.9.0",
+    "eslint-config-prettier": "^10.0.1",
+    "eslint-plugin-prettier": "^5.2.2",
+    "globals": "^17.11.0",
+    "prettier": "^3.4.2",
+    "@typescript/native": "npm:typescript@^7.0.2",
+    "typescript": "npm:@typescript/typescript6@^6.0.2",
+    "typescript-eslint": "^8.67.0",
     "vitest": "^4.1.11"
   },
   "dependencies": {

@@ -150,7 +150,7 @@ Objetos que possuem uma **identidade contínua** através do tempo.
 
 ```typescript
 // Exemplo: src/core/entities/entity.ts
-import { UniqueEntityID } from "./unique-entity-id";
+import { UniqueEntityID } from './unique-entity-id';
 
 export abstract class Entity<Props> {
   private _id: UniqueEntityID;
@@ -201,14 +201,14 @@ export class Slug {
    */
   static createFromText(text: string): Slug {
     const slugText = text
-      .normalize("NFKD")
+      .normalize('NFKD')
       .toLowerCase()
       .trim()
-      .replace(/\s+/g, "-")
-      .replace(/[^\w-]+/g, "")
-      .replace(/_/g, "-")
-      .replace(/--+/g, "-")
-      .replace(/-$/g, "");
+      .replace(/\s+/g, '-')
+      .replace(/[^\w-]+/g, '')
+      .replace(/_/g, '-')
+      .replace(/--+/g, '-')
+      .replace(/-$/g, '');
 
     return new Slug(slugText);
   }
@@ -228,10 +228,10 @@ Um **Agregado** é um cluster de Entidades e Objetos de Valor tratados como uma 
 
 ```typescript
 // Exemplo: src/domain/entities/question.ts
-import { AggregateRoot } from "@/core/entities/aggregate-root";
-import { Slug } from "./value-objects/slug";
-import { UniqueEntityID } from "@/core/entities/unique-entity-id";
-import { Optional } from "@/core/types/optional";
+import { AggregateRoot } from '@/core/entities/aggregate-root';
+import { Slug } from './value-objects/slug';
+import { UniqueEntityID } from '@/core/entities/unique-entity-id';
+import { Optional } from '@/core/types/optional';
 
 export interface QuestionProps {
   authorId: UniqueEntityID;
@@ -272,7 +272,7 @@ export class Question extends AggregateRoot<QuestionProps> {
   }
 
   static create(
-    props: Optional<QuestionProps, "createdAt" | "slug">,
+    props: Optional<QuestionProps, 'createdAt' | 'slug'>,
     id?: UniqueEntityID,
   ): Question {
     const question = new Question(
@@ -310,7 +310,7 @@ Fornecem uma abstração para a coleção de agregados persistidos, operando com
 
 ```typescript
 // src/domain/repositories/questions-repository.ts
-import { Question } from "../entities/question";
+import { Question } from '../entities/question';
 
 export interface QuestionsRepository {
   findById(id: string): Promise<Question | null>;
@@ -455,12 +455,12 @@ export const right = <L, R>(r: R): Either<L, R> => new Right(r);
 
 ```typescript
 // src/domain/use-cases/choose-question-best-answer.ts
-import { Either, left, right } from "@/core/logic/either";
-import { Question } from "@/domain/entities/question";
-import { QuestionsRepository } from "@/domain/repositories/questions-repository";
-import { AnswersRepository } from "@/domain/repositories/answers-repository";
-import { ResourceNotFoundError } from "@/core/errors/resource-not-found-error";
-import { NotAllowedError } from "@/core/errors/not-allowed-error";
+import { Either, left, right } from '@/core/logic/either';
+import { Question } from '@/domain/entities/question';
+import { QuestionsRepository } from '@/domain/repositories/questions-repository';
+import { AnswersRepository } from '@/domain/repositories/answers-repository';
+import { ResourceNotFoundError } from '@/core/errors/resource-not-found-error';
+import { NotAllowedError } from '@/core/errors/not-allowed-error';
 
 interface ChooseQuestionBestAnswerUseCaseRequest {
   authorId: string;

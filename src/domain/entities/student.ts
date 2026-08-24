@@ -1,6 +1,6 @@
-import type { UniqueEntityId } from "@/core/entities/unique-entity-id";
+import type { UniqueEntityId } from '@/core/entities/unique-entity-id';
 
-import { Entity } from "@/core/entities/entity.js";
+import { Entity } from '@/core/entities/entity.js';
 
 interface StudentProps {
   name: string;
