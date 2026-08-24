@@ -1,8 +1,8 @@
 import { expect, test } from 'vitest';
 
-import type { AnswersRepository } from '@/domain/repositories/answers-repository.js';
+import type { AnswersRepository } from '@/domain/forum/application/repositories/answers-repository';
 
-import { AnswerQuestionUseCase } from '@/domain/use-cases/answer-question.js';
+import { AnswerQuestionUseCase } from '@/domain/forum/application/use-cases/answer-question';
 
 const makeAnswersRepository: AnswersRepository = {
   create: () => Promise.resolve(),
