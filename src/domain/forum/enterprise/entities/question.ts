@@ -2,11 +2,11 @@ import dayjs from 'dayjs';
 
 import type { UniqueEntityId } from '@/core/entities/unique-entity-id';
 import type { Optional } from '@/core/types/optional';
-import { Slug } from '@/domain/forum/enterprise/entities/value-objects/slug';
 
 import { Entity } from '@/core/entities/entity.js';
+import { Slug } from '@/domain/forum/enterprise/entities/value-objects/slug';
 
-interface QuestionProps {
+export interface QuestionProps {
   authorId: UniqueEntityId;
   bestAnswerId?: UniqueEntityId | undefined;
   title: string;
